@@ -2,10 +2,20 @@ package com.springboot.proyectoFinal.models.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+
+@Entity
+@Table(name = "productos")
 public class Producto {
+
+	@Id
+	@GeneratedValue()
     private Long id;
     private String nombre;
     private String descripcion;

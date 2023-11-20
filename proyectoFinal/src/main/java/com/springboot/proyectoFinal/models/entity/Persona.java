@@ -2,12 +2,36 @@ package com.springboot.proyectoFinal.models.entity;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name ="personas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name ="id_persona")
     private Long id;
+	
+	@Column(name = "nombre_persona")
     private String nombre;
+	
+	@Column(name = "apellido_persona")
     private String apellido;
+	
+	@Column(name = "correo")
     private String email;
+	
+	@Column(name = "pass")
     private String contrasenia;
 
     public Persona() {
