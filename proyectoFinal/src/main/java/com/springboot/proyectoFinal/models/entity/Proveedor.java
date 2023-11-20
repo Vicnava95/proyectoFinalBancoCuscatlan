@@ -17,7 +17,7 @@ public class Proveedor implements Serializable {
     
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "nombre_proveedor")
@@ -25,6 +25,8 @@ public class Proveedor implements Serializable {
 	
 	@Column(name = "direccion_proveedor")
     private String direccion;
+
+    private static final long serialVersionUID = 1l;
 
     public Proveedor() {
     }

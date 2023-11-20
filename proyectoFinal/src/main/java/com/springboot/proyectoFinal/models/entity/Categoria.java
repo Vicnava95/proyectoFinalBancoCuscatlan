@@ -1,10 +1,18 @@
 package com.springboot.proyectoFinal.models.entity;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
+@Entity
+@Table(name = "categorias")
 public class Categoria implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nombre_categoria")
     private String nombre;
+
+    private static final long serialVersionUID = 1l;
 
     public Categoria() {
     }

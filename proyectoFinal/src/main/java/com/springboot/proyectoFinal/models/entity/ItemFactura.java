@@ -1,9 +1,26 @@
 package com.springboot.proyectoFinal.models.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "items_facturas")
 public class ItemFactura {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer cantidad;
+    @ManyToOne(
+            optional = true,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "producto_id")
     private Producto producto;
+
+    private static final long serialVersionUID = 1l;
 
     public ItemFactura(Long id, Integer cantidad, Producto producto) {
         this.id = id;

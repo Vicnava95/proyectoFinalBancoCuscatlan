@@ -34,6 +34,8 @@ public abstract class Persona implements Serializable {
 	@Column(name = "pass")
     private String contrasenia;
 
+    private static final long serialVersionUID = 1l;
+
     public Persona() {
     }
     public Persona(Long id, String nombre, String apellido, String email, String contrasenia) {

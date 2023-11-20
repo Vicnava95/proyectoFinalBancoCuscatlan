@@ -1,29 +1,43 @@
 package com.springboot.proyectoFinal.models.entity;
 
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-
-
 @Entity
 @Table(name = "productos")
 public class Producto {
-
-	@Id
-	@GeneratedValue()
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String descripcion;
     private BigDecimal precio;
     private Integer stock;
     private LocalDateTime createAt;
+    @ManyToOne(
+            optional = true,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
+    @ManyToOne(
+            optional = true,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
+
+    private static final long serialVersionUID = 1l;
 
     public Producto() {
     }

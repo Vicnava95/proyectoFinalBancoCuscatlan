@@ -2,24 +2,19 @@ package com.springboot.proyectoFinal.models.entity;
 
 import com.springboot.proyectoFinal.models.entity.enumeradores.TipoUsuario;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Usuario extends Persona{
-    
-	
 	@Column(name = "username")
 	private String username;
 	
 	@Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
-	
-	
+
     public Usuario(Long id, String nombre, String apellido, String email, String contrasenia, String username, TipoUsuario tipoUsuario) {
         super(id, nombre, apellido, email, contrasenia);
         this.username = username;
