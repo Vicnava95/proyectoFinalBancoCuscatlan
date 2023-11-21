@@ -11,19 +11,14 @@ import com.springboot.proyectoFinal.repositorios.ProveedorRepository;
 @RestController
 @RequestMapping("/proveedor")
 public class ProveedorController {
-	
-	
+
 	@Autowired
 	ProveedorRepository proveedorDAO;
-	
-	
-	
+
 	@GetMapping(value = "/listar", produces = "application/json")
 	public String listar()
 	{
-		
 		Gson json = new Gson();
-		
 		return json.toJson(proveedorDAO.findAll());
 	}
 	

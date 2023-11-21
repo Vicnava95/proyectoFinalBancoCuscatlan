@@ -29,8 +29,7 @@ public class Proveedor implements Serializable {
     public Proveedor() {
     }
 
-    public Proveedor(Long id, String nombre, String direccion) {
-        this.id = id;
+    public Proveedor(String nombre, String direccion) {
         this.nombre = nombre;
         this.direccion = direccion;
     }

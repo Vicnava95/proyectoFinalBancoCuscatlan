@@ -6,7 +6,9 @@ import java.util.Optional;
 import com.springboot.proyectoFinal.models.entity.Categoria;
 import com.springboot.proyectoFinal.repositorios.CategoriaRepository;
 import com.springboot.proyectoFinal.servicios.contratos.CategoriaDAO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CategoriaDAOImpl extends GenericDAOImpl<Categoria, CategoriaRepository> implements CategoriaDAO {
 
 	public CategoriaDAOImpl(CategoriaRepository repository) {

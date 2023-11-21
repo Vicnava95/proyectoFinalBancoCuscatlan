@@ -8,7 +8,9 @@ import com.springboot.proyectoFinal.models.entity.Proveedor;
 import com.springboot.proyectoFinal.repositorios.ProveedorRepository;
 import com.springboot.proyectoFinal.servicios.contratos.GenericDAO;
 import com.springboot.proyectoFinal.servicios.contratos.ProveedorDAO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProveedorDAOImpl extends GenericDAOImpl<Proveedor, ProveedorRepository> implements ProveedorDAO{
 
 	public ProveedorDAOImpl(ProveedorRepository repository) {
