@@ -53,15 +53,12 @@ public class Factura {
     public void setNotas(String notas) {
         this.notas = notas;
     }
-
     public LocalDateTime getCreateAt() {
         return createAt;
     }
-
     public void setCreateAt(LocalDateTime createAt) {
         this.createAt = createAt;
     }
-
     public List<ItemFactura> getItems() {
         return items;
     }

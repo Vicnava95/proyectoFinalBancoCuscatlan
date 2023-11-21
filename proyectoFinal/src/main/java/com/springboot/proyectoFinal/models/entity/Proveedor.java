@@ -14,8 +14,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "proveedores")
 public class Proveedor implements Serializable {
-    
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
