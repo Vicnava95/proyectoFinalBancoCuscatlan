@@ -3,11 +3,12 @@ package com.springboot.proyectoFinal.models.entity;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "productos")
-public class Producto {
+public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,20 +19,12 @@ public class Producto {
     private LocalDateTime createAt;
     @ManyToOne(
             optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
     @ManyToOne(
             optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "categoria_id")
@@ -41,15 +34,12 @@ public class Producto {
 
     public Producto() {
     }
-    public Producto(Long id, String nombre, String descripcion, BigDecimal precio, Integer stock, LocalDateTime createAt, Proveedor proveedor, Categoria categoria) {
-        this.id = id;
+    public Producto(String nombre, String descripcion, BigDecimal precio, Integer stock, LocalDateTime createAt) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;
         this.stock = stock;
         this.createAt = createAt;
-        this.proveedor = proveedor;
-        this.categoria = categoria;
     }
 
     public Long getId() {
