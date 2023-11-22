@@ -22,17 +22,17 @@ public class CategoriaControler {
 	CategoriaRepository categoriaDAO;
 	
 	@GetMapping(value = "/listar", produces = "application/json")
-	public String listar()
+	public Iterable<Categoria> listar()
 	{
-		Gson json = new Gson();
 		
-		return json.toJson(categoriaDAO.findAll());
-		
+		return categoriaDAO.findAll();
 	}
 	
-	@GetMapping(value = "/nuevoNombre", produces = "application/json")
+	/*
+	@GetMapping(value = "/nuevoNombres", produces = "application/json")
 	public String pornombre(@RequestParam("nombre") String nombre)
 	{
+		
 		Gson json = new Gson();
 		
 		Categoria  cat= new Categoria(); 
@@ -44,6 +44,20 @@ public class CategoriaControler {
 		
 		//return json.toJson(nombre);
 	}
+*/
+
+	
+	
+	@PostMapping(value = "/nuevoNombre")
+	Categoria   pornombrePost(@RequestParam("nombre") String nombre)
+	{
+		
+		Gson json = new Gson();
+		Categoria  cat= new Categoria(); 
+		cat.setNombre(nombre);
+		return categoriaDAO.save(cat);	
+	}
+	
 	
 	
 
