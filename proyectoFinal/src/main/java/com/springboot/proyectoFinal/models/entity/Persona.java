@@ -38,8 +38,7 @@ public abstract class Persona implements Serializable {
 
     public Persona() {
     }
-    public Persona(Long id, String nombre, String apellido, String email, String contrasenia) {
-        this.id = id;
+    public Persona(String nombre, String apellido, String email, String contrasenia) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
