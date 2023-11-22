@@ -17,7 +17,7 @@ public class CategoriaDAOImpl extends GenericDAOImpl<Categoria, CategoriaReposit
 	}
 
 	@Override
-	public Optional<Categoria> buscarPorNombre(String nombre) {
+	public Iterable<Categoria> buscarPorNombre(String nombre) {
 		// TODO Auto-generated method stub
 		return repository.buscarPorNombre(nombre);
 	}

@@ -12,8 +12,8 @@ import com.springboot.proyectoFinal.models.entity.Categoria;
 public interface CategoriaRepository extends CrudRepository<Categoria, Long>{
 	
 	 //Acá se pueden realizar consultas específicas
-    @Query("select c from Categoria c where c.nombre = ?1")
-    Optional<Categoria> buscarPorNombre(String nombre);
+    @Query("select c from Categoria c where c.nombre  like %?1%")
+    Iterable<Categoria> buscarPorNombre(String nombre);
     
 
 }

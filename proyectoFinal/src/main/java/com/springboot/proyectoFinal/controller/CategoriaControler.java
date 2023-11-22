@@ -28,36 +28,27 @@ public class CategoriaControler {
 		return categoriaDAO.findAll();
 	}
 	
-	/*
-	@GetMapping(value = "/nuevoNombres", produces = "application/json")
-	public String pornombre(@RequestParam("nombre") String nombre)
-	{
-		
-		Gson json = new Gson();
-		
-		Categoria  cat= new Categoria(); 
-		cat.setNombre(nombre);
-		categoriaDAO.save(cat);
-		
-		
-		return json.toJson(categoriaDAO.findAll()); 
-		
-		//return json.toJson(nombre);
-	}
-*/
-
 	
 	
 	@PostMapping(value = "/nuevoNombre")
 	Categoria   pornombrePost(@RequestParam("nombre") String nombre)
 	{
 		
-		Gson json = new Gson();
+		
 		Categoria  cat= new Categoria(); 
 		cat.setNombre(nombre);
 		return categoriaDAO.save(cat);	
 	}
 	
+	@GetMapping(value = "/byNombre", produces = "application/json" )
+	public Iterable<Categoria> byNombre( @RequestParam("nombre") String nombre)
+	{
+		
+		Gson json = new Gson();
+		
+		
+		return categoriaDAO.buscarPorNombre(nombre);
+	}
 	
 	
 
