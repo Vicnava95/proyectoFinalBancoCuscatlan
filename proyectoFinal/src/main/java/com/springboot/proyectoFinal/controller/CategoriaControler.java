@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,19 +30,21 @@ public class CategoriaControler {
 		
 	}
 	
-	/*@GetMapping(value = "/porNombre", produces = "application/json")
-	public String pornombre(@RequestParam("id") Long id)
+	@GetMapping(value = "/nuevoNombre", produces = "application/json")
+	public String pornombre(@RequestParam("nombre") String nombre)
 	{
 		Gson json = new Gson();
 		
-		List<Categoria> lista =  categoriaDAO.findById(id);
+		Categoria  cat= new Categoria(); 
+		cat.setNombre(nombre);
+		categoriaDAO.save(cat);
 		
 		
-		return json.toJson(categoriaDAO.findById(id)); 
+		return json.toJson(categoriaDAO.findAll()); 
 		
 		//return json.toJson(nombre);
 	}
-	*/
+	
 	
 
 }
