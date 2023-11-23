@@ -55,14 +55,11 @@ public class TestCommands implements CommandLineRunner {
         producto1.setProveedor(proveedor1);
         productoDAO.save(producto1);
 
-
-
         ItemFactura itemFactura1 = new ItemFactura(2,producto1);
         itemFacturaDAO.save(itemFactura1);
 
         Factura factura1 = new Factura("Primera factura",(Usuario) persona1);
+        factura1.addItemFactura(itemFactura1);
         facturaDAO.save(factura1);
-
-
     }
 }

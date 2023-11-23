@@ -15,7 +15,7 @@ public class Factura implements Serializable {
     private String notas;
     private LocalDateTime createAt;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "factura_id")
     private List<ItemFactura> items;
 
@@ -28,11 +28,12 @@ public class Factura implements Serializable {
 
     private static final long serialVersionUID = 1l;
 
-    public Factura() {
+    public Factura()  {
         this.items =new ArrayList<ItemFactura>();
     }
 
     public Factura(String notas, Usuario usuario) {
+        this.items =new ArrayList<ItemFactura>();
         this.notas = notas;
         this.usuario = usuario;
     }
