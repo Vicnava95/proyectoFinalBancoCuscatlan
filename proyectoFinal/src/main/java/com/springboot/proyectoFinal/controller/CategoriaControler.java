@@ -31,7 +31,7 @@ public class CategoriaControler {
 	
 	
 	@PostMapping(value = "/nuevoNombre")
-	Categoria   pornombrePost(@RequestParam("nombre") String nombre)
+	Categoria   nuevoNombre(@RequestParam("nombre") String nombre)
 	{
 		
 		
@@ -43,10 +43,6 @@ public class CategoriaControler {
 	@GetMapping(value = "/byNombre", produces = "application/json" )
 	public Iterable<Categoria> byNombre( @RequestParam("nombre") String nombre)
 	{
-		
-		Gson json = new Gson();
-		
-		
 		return categoriaDAO.buscarPorNombre(nombre);
 	}
 	

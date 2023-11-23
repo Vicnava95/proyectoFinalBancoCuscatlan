@@ -56,14 +56,14 @@ public class ProveedorController {
 	@PutMapping(value="/actualizar", produces = "application/json")
 	public Proveedor actualizarProveedor(@RequestParam("proveedor") String nombre, @RequestParam("direccion") String direccion, @RequestParam("id") Long id)
 	{
-		
 		Optional<Proveedor>  provider = proveedorDAO.findById(id);
 		Proveedor prov = provider.get();
 		prov.setNombre(nombre);
 		prov.setDireccion(direccion);
 		return proveedorDAO.save(prov);
-		
-		
 	}
+	
+	
+	
 
 }
