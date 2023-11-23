@@ -2,10 +2,7 @@ package com.springboot.proyectoFinal;
 
 import com.springboot.proyectoFinal.models.entity.*;
 import com.springboot.proyectoFinal.models.entity.enumeradores.TipoUsuario;
-import com.springboot.proyectoFinal.servicios.contratos.CategoriaDAO;
-import com.springboot.proyectoFinal.servicios.contratos.PersonaDAO;
-import com.springboot.proyectoFinal.servicios.contratos.ProductoDAO;
-import com.springboot.proyectoFinal.servicios.contratos.ProveedorDAO;
+import com.springboot.proyectoFinal.servicios.contratos.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -28,6 +25,10 @@ public class TestCommands implements CommandLineRunner {
     private ProveedorDAO proveedorDAO;
     @Autowired
     private ProductoDAO productoDAO;
+    @Autowired
+    private ItemFacturaDAO itemFacturaDAO;
+    @Autowired
+    private FacturaDAO facturaDAO;
 
     @Override
     public void run(String... args) throws Exception {
@@ -53,6 +54,15 @@ public class TestCommands implements CommandLineRunner {
         producto1.setCategoria(categoria1);
         producto1.setProveedor(proveedor1);
         productoDAO.save(producto1);
+
+
+
+        ItemFactura itemFactura1 = new ItemFactura(2,producto1);
+        itemFacturaDAO.save(itemFactura1);
+
+        Factura factura1 = new Factura("Primera factura",(Usuario) persona1);
+        facturaDAO.save(factura1);
+
 
     }
 }

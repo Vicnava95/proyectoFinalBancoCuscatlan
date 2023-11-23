@@ -13,7 +13,6 @@ public class Categoria implements Serializable {
     private Long id;
     @Column(name = "nombre_categoria")
     private String nombre;
-
     private static final long serialVersionUID = 1l;
 
     public Categoria() {

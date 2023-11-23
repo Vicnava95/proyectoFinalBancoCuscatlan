@@ -2,19 +2,17 @@ package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "items_facturas")
-public class ItemFactura {
+public class ItemFactura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Integer cantidad;
     @ManyToOne(
             optional = true,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            },
             fetch = FetchType.LAZY
     )
     @JoinColumn(name = "producto_id")
@@ -22,8 +20,7 @@ public class ItemFactura {
 
     private static final long serialVersionUID = 1l;
 
-    public ItemFactura(Long id, Integer cantidad, Producto producto) {
-        this.id = id;
+    public ItemFactura(Integer cantidad, Producto producto) {
         this.cantidad = cantidad;
         this.producto = producto;
     }
