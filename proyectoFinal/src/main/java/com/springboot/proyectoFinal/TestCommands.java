@@ -26,7 +26,6 @@ public class TestCommands implements CommandLineRunner {
     private CategoriaDAO categoriaDAO;
     @Autowired
     private ProveedorDAO proveedorDAO;
-
     @Autowired
     private ProductoDAO productoDAO;
 

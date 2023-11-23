@@ -3,6 +3,8 @@ package com.springboot.proyectoFinal.models.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.Set;
+
 @Entity
 @Table(name = "categorias")
 public class Categoria implements Serializable {
