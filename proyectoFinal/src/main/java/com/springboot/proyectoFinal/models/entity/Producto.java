@@ -18,16 +18,20 @@ public class Producto implements Serializable {
     private Integer stock;
     private LocalDateTime createAt;
     @ManyToOne(
-            optional = true,
-            fetch = FetchType.LAZY
+            optional = true
     )
-    @JoinColumn(name = "proveedor_id")
+    @JoinColumn(
+            name = "proveedor_id",
+            foreignKey = @ForeignKey(name = "FK_PROVEEDOR_ID")
+    )
     private Proveedor proveedor;
     @ManyToOne(
-            optional = true,
-            fetch = FetchType.LAZY
+            optional = true
     )
-    @JoinColumn(name = "categoria_id")
+    @JoinColumn(
+            name = "categoria_id",
+            foreignKey = @ForeignKey(name = "FK_CATEGORIA_ID")
+    )
     private Categoria categoria;
 
     private static final long serialVersionUID = 1l;
