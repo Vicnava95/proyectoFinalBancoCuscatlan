@@ -14,6 +14,8 @@ public class Usuario extends Persona{
 	
 	@Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
+	
+	public Usuario() {};
 
     public Usuario(String nombre, String apellido, String email, String contrasenia, String username, TipoUsuario tipoUsuario) {
         super(nombre, apellido, email, contrasenia);

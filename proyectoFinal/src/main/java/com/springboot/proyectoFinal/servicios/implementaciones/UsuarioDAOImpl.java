@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class UsuarioDAOImpl extends PersonaDAOImpl implements UsuarioDAO {
     public UsuarioDAOImpl(@Qualifier("repositorioUsuario") PersonaRepository repository) {
