@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +53,18 @@ public class CategoriaControler {
 	{
 		
 		categoriaDAO.deleteById(id);
+	}
+	
+	@PutMapping(value = "/actualizar", produces ="application/json")
+	public Categoria actualizarCategoria(@RequestParam("nombre") String nombre, @RequestParam("id") Long id)
+	{
+		Optional<Categoria> cat = categoriaDAO.findById(id);
+		
+		Categoria categoria = cat.get();
+		
+		categoria.setNombre(nombre);
+		
+		return categoriaDAO.save(categoria);
 	}
 	
 

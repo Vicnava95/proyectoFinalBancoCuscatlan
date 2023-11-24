@@ -20,7 +20,7 @@ public class ItemFactura implements Serializable {
     @JoinColumn(name = "producto_id")
     private Producto producto;
 
-    private static final long serialVersionUID = 1l;
+    
 
     public ItemFactura() {
     }
@@ -66,4 +66,6 @@ public class ItemFactura implements Serializable {
                 ", producto=" + producto.toString() +
                 '}';
     }
+    
+    private static final long serialVersionUID = 1l;
 }
