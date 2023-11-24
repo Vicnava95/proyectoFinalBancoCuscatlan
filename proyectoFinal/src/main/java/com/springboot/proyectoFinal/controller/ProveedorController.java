@@ -3,6 +3,7 @@ package com.springboot.proyectoFinal.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,13 @@ public class ProveedorController {
 		return proveedorDAO.save(prov);
 	}
 	
+	
+	@DeleteMapping(value = "/eliminar", produces = "application/json")
+	public void eliminarProveedor(@RequestParam("id") Long id)
+	{
+		
+		proveedorDAO.deleteById(id);
+	}
 	
 	
 
