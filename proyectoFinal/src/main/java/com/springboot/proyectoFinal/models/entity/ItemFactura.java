@@ -3,6 +3,8 @@ package com.springboot.proyectoFinal.models.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "items_facturas")
@@ -47,6 +49,10 @@ public class ItemFactura implements Serializable {
 
     public void setProducto(Producto producto) {
         this.producto = producto;
+    }
+
+    public BigDecimal calcularImporte(){
+        return BigDecimal.valueOf(this.cantidad).multiply(producto.getPrecio());
     }
 
     @Override

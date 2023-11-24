@@ -1,6 +1,8 @@
 package com.springboot.proyectoFinal.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;

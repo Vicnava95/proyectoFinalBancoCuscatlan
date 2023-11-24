@@ -20,10 +20,7 @@ public class Producto implements Serializable {
     @ManyToOne(
             optional = true
     )
-    @JoinColumn(
-            name = "proveedor_id",
-            foreignKey = @ForeignKey(name = "FK_PROVEEDOR_ID")
-    )
+    @JoinColumn(name = "proveedor_id")
     private Proveedor proveedor;
     @ManyToOne(
             optional = true

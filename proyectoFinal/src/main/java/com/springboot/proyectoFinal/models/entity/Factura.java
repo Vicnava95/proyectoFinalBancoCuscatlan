@@ -3,6 +3,7 @@ package com.springboot.proyectoFinal.models.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,5 +73,13 @@ public class Factura implements Serializable {
     }
     public void addItemFactura(ItemFactura itemFactura){
         items.add(itemFactura);
+    }
+
+    public Double sumaTotal(){
+        Double total = 0.0;
+        for (int i = 0; i < items.size(); i++){
+            total += items.get(i).calcularImporte().doubleValue();
+        }
+        return total;
     }
 }
