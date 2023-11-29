@@ -20,9 +20,6 @@ public class ProveedorDAOImpl extends GenericDAOImpl<Proveedor, ProveedorReposit
 
 	@Override
 	public Optional<Proveedor> buscarPorNombre(String nombre) {
-		
-		
-		
 		return repository.buscarPorNombre(nombre);
 	}
 

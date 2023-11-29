@@ -13,6 +13,4 @@ public interface ProveedorRepository extends CrudRepository<Proveedor, Long>{
     Optional<Proveedor> buscarPorNombre(String nombre);
     @Query("select p from Proveedor p where p.direccion = ?1")
     Optional<Proveedor> buscarPorDireccion(String direccion);
-    
-
 }
