@@ -10,6 +10,4 @@ import java.util.Optional;
 
 public interface FacturaRepository extends CrudRepository<Factura,Long> {
 
-    @Query("select f from Factura f where f.usuario_id = ?1")
-    Optional<Factura> buscarPorUsuarioID(Long id);
 }
