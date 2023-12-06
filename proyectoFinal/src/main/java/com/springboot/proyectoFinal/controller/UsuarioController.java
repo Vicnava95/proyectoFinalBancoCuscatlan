@@ -1,15 +1,13 @@
 package com.springboot.proyectoFinal.controller;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.springboot.proyectoFinal.exception.BadRequestException;
+import com.springboot.proyectoFinal.models.entity.Categoria;
+import com.springboot.proyectoFinal.servicios.contratos.UsuarioDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.springboot.proyectoFinal.models.entity.Persona;
 import com.springboot.proyectoFinal.models.entity.Usuario;
@@ -21,8 +19,57 @@ import com.springboot.proyectoFinal.repositorios.UsuarioRepository;
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
-	
+
+	private final UsuarioDAO usuarioDAO;
+
 	@Autowired
+	public UsuarioController(UsuarioDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
+	}
+
+	@GetMapping(value = "/listar")
+	public List<Persona> listarUsuarios(){
+		List<Persona> usuarios = (List<Persona>) usuarioDAO.findAll();
+		if (usuarios.isEmpty()){
+			throw new BadRequestException("No existen usuarios");
+		}
+		return usuarios;
+	}
+	@GetMapping("/{id}")
+	public Persona obtenerPorId(@PathVariable Long id){
+		Optional<Persona> persona = usuarioDAO.findById(id);
+		if (!persona.isPresent()){
+			throw new BadRequestException("El id de la persona no existe");
+		}
+		return persona.get();
+	}
+	@PostMapping
+	public Usuario crearPersona(@RequestBody Usuario persona){
+		return (Usuario) usuarioDAO.save(persona);
+	}
+
+	@PutMapping("/{id}")
+	public Usuario actualizarUsuario(@PathVariable Long id, @RequestBody Usuario usuario){
+		Usuario usuarioUpdate = null;
+		Optional<Persona> usuarioO = usuarioDAO.findById(id);
+		if (!usuarioO.isPresent()){
+			throw new BadRequestException("El id del usuario no existe");
+		}
+		usuarioUpdate = (Usuario) usuarioO.get();
+		usuarioUpdate.setNombre(usuario.getNombre());
+		usuarioUpdate.setTipoUsuario(usuario.getTipoUsuario());
+		usuarioUpdate.setUsername(usuario.getUsername());
+		usuarioUpdate.setApellido(usuario.getApellido());
+
+		return (Usuario) usuarioDAO.save(usuarioUpdate);
+	}
+
+	@DeleteMapping(value = "/{id}")
+	public void eliminarUsuario(@PathVariable Long id){
+        usuarioDAO.deleteById(id);
+    }
+	//David
+	/*@Autowired
 	private UsuarioRepository usuarioDAO;
 	
 	@GetMapping(value = "/listar", produces = "application/json")
@@ -102,6 +149,6 @@ public class UsuarioController {
 		
 		
 		return usuarioDAO.save(usuario);
-	}
+	}*/
 	
 }

@@ -16,13 +16,13 @@ public class Factura implements Serializable {
     private String notas;
     private LocalDateTime createAt;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
     @JoinColumn(name = "factura_id")
     private List<ItemFactura> items;
 
     @ManyToOne(
             optional = true,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;

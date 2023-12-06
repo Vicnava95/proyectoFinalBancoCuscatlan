@@ -1,6 +1,7 @@
 package com.springboot.proyectoFinal.controller;
 
 import com.google.gson.Gson;
+import com.springboot.proyectoFinal.exception.BadRequestException;
 import com.springboot.proyectoFinal.models.entity.Factura;
 import com.springboot.proyectoFinal.models.entity.ItemFactura;
 import com.springboot.proyectoFinal.models.entity.Producto;
@@ -11,13 +12,30 @@ import com.springboot.proyectoFinal.servicios.contratos.ItemFacturaDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/itemsFactura")
 public class ItemFacturaController {
 
+    private final ItemFacturaDAO itemFacturaDAO;
+
     @Autowired
+    public ItemFacturaController(ItemFacturaDAO itemFacturaDAO) {
+        this.itemFacturaDAO = itemFacturaDAO;
+    }
+
+    @GetMapping(value = "/listar")
+    public List<ItemFactura> listarItems(){
+        List<ItemFactura> items = (List<ItemFactura>) itemFacturaDAO.findAll();
+        if (items.isEmpty()){
+            throw new BadRequestException("No existen items de factura");
+        }
+        return items;
+    }
+    //David
+    /*@Autowired
     ItemFacturaRepository itemFacturaDAO;
 
     @Autowired
@@ -57,7 +75,7 @@ public class ItemFacturaController {
     @DeleteMapping(value = "/eliminar", produces = "application/json")
     public void eliminarItem(@RequestParam("id") Long id){
         itemFacturaDAO.deleteById(id);
-    }
+    }*/
 
 
 }
