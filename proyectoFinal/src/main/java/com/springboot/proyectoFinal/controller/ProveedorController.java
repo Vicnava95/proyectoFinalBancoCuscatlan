@@ -1,7 +1,11 @@
 package com.springboot.proyectoFinal.controller;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.springboot.proyectoFinal.exception.BadRequestException;
+import com.springboot.proyectoFinal.models.entity.Producto;
+import com.springboot.proyectoFinal.servicios.contratos.ProveedorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +22,29 @@ import com.google.gson.Gson;
 import com.springboot.proyectoFinal.models.entity.Proveedor;
 import com.springboot.proyectoFinal.repositorios.ProveedorRepository;
 
-
-
 @RestController
 @RequestMapping("/proveedor")
 public class ProveedorController {
 
-	@Autowired
+    private final ProveedorDAO proveedorDAO;
+
+    @Autowired
+    public ProveedorController(ProveedorDAO proveedorDAO) {
+        this.proveedorDAO = proveedorDAO;
+    }
+
+    @GetMapping(value = "/listar")
+    public List<Proveedor> listar()
+    {
+        List<Proveedor> proveedores = (List<Proveedor>) proveedorDAO.findAll();
+        if(proveedores.isEmpty()){
+            throw new BadRequestException("No existen proveedores");
+        }
+        return proveedores;
+    }
+
+    //David
+	/*@Autowired
 	ProveedorRepository proveedorDAO;
 
 	@GetMapping(value = "/listar", produces = "application/json")
@@ -70,7 +90,7 @@ public class ProveedorController {
 	{
 		
 		proveedorDAO.deleteById(id);
-	}
+	}*/
 	
 	
 
