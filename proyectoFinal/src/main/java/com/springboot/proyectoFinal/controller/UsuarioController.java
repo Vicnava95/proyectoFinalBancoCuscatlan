@@ -18,6 +18,7 @@ import com.springboot.proyectoFinal.repositorios.PersonaRepository;
 import com.springboot.proyectoFinal.repositorios.UsuarioRepository;
 
 
+@Deprecated
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {

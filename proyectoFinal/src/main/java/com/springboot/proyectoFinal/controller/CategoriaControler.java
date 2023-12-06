@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.springboot.proyectoFinal.models.entity.Categoria;
 import com.springboot.proyectoFinal.repositorios.CategoriaRepository;
 
+@Deprecated
 @RestController
 @RequestMapping("/categoria")
 public class CategoriaControler {
