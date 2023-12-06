@@ -11,28 +11,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/categoria")
-public class CategoriaControler {
+public class CategoriaControler extends GenericController<Categoria, CategoriaDAO>{
 
-	private final CategoriaDAO categoriaDAO;
 
 	@Autowired
-	public CategoriaControler(CategoriaDAO categoriaDAO) {
-		this.categoriaDAO = categoriaDAO;
+	public CategoriaControler(CategoriaDAO service) {
+		super(service);
+		nombreEntidad = "Categoria";
 	}
 
-	@GetMapping(value = "/listar")
-	public List<Categoria> listar()
-	{
-		List<Categoria> categorias = (List<Categoria>) categoriaDAO.findAll();
-		if(categorias.isEmpty()){
-			throw new BadRequestException("No existen categorias");
-		}
-		return categorias;
-	}
+
 
 	@GetMapping("/{id}")
 	public Categoria obtenerPorId(@PathVariable Long id){
-		Optional<Categoria> categoria = categoriaDAO.findById(id);
+		Optional<Categoria> categoria = service.findById(id);
 		if (!categoria.isPresent()){
 			throw new BadRequestException("El id de la carrera no existe");
 		}
@@ -41,6 +33,6 @@ public class CategoriaControler {
 
 	@PostMapping
 	public Categoria crearCategoria(@RequestBody Categoria categoria){
-		return categoriaDAO.save(categoria);
+		return service.save(categoria);
 	}
 }

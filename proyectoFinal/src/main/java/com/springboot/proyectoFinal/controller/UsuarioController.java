@@ -18,7 +18,7 @@ import com.springboot.proyectoFinal.repositorios.UsuarioRepository;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+public class UsuarioController{
 
 	private final UsuarioDAO usuarioDAO;
 
