@@ -3,10 +3,10 @@ package com.springboot.proyectoFinal.models.entity;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @Table(name = "facturas")
 public class Factura implements Serializable {
@@ -77,8 +77,8 @@ public class Factura implements Serializable {
     public Usuario getUsuario() {
         return usuario;
     }
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(Persona usuario) {
+        this.usuario = (Usuario) usuario;
     }
 
     public Double sumaTotal(){
