@@ -5,5 +5,5 @@ import com.springboot.proyectoFinal.models.entity.Factura;
 import java.util.Optional;
 
 public interface FacturaDAO extends GenericDAO<Factura>{
-
+    Optional<Factura> buscarPorUsuarioId(Long id);
 }

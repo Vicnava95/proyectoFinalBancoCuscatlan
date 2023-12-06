@@ -50,10 +50,7 @@ public class DatosDummy {
     }
 
     public static Factura factura(){
-        Factura factura = new Factura("Primera factura",(Usuario) persona1());
-        factura.addItemFactura(itemFactura1());
-        factura.addItemFactura(itemFactura2());
-        return factura;
+        return new Factura("Primera factura", (Usuario) persona1());
     }
 
 

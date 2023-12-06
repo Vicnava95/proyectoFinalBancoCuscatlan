@@ -13,4 +13,8 @@ public class FacturaDAOImpl extends GenericDAOImpl<Factura, FacturaRepository> i
         super(repository);
     }
 
+    @Override
+    public Optional<Factura> buscarPorUsuarioId(Long id) {
+        return repository.buscarPorUsuarioId(id);
+    }
 }

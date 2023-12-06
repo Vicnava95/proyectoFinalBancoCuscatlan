@@ -2,6 +2,7 @@ package com.springboot.proyectoFinal.servicios.implementaciones;
 
 import com.springboot.proyectoFinal.models.entity.Factura;
 import com.springboot.proyectoFinal.models.entity.ItemFactura;
+import com.springboot.proyectoFinal.models.entity.Producto;
 import com.springboot.proyectoFinal.repositorios.ItemFacturaRepository;
 import com.springboot.proyectoFinal.servicios.contratos.ItemFacturaDAO;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class ItemFacturaDAOImpl extends GenericDAOImpl<ItemFactura, ItemFacturaR
     }
 
     @Override
-    public Optional<Factura> buscarPorIdProducto(Long id) {
+    public Optional<ItemFactura> buscarPorIdProducto(Long id) {
         return repository.buscarPorIdProducto(id);
     }
 }
