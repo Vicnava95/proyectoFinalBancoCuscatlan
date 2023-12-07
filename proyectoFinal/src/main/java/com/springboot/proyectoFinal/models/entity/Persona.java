@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -23,15 +24,19 @@ public abstract class Persona implements Serializable {
     private Long id;
 	
 	@Column(name = "nombre_persona")
+    @NotEmpty
     private String nombre;
 	
 	@Column(name = "apellido_persona")
+    @NotEmpty
     private String apellido;
 	
 	@Column(name = "correo")
+    @NotEmpty
     private String email;
 	
 	@Column(name = "pass")
+    @NotEmpty
     private String contrasenia;
 
     private static final long serialVersionUID = 1l;

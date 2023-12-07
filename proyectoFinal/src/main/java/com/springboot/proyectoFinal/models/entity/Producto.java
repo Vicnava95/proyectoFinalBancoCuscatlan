@@ -1,6 +1,9 @@
 package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -12,9 +15,13 @@ public class Producto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String nombre;
+    @NotEmpty
     private String descripcion;
+    @Positive
     private BigDecimal precio;
+    @Min(0)
     private Integer stock;
     private LocalDateTime createAt;
     @ManyToOne(

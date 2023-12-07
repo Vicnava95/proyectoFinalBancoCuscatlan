@@ -1,6 +1,8 @@
 package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,7 +15,9 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     private String notas;
+    @NotNull
     private LocalDateTime createAt;
 
     @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
@@ -37,6 +41,11 @@ public class Factura implements Serializable {
         this.items =new ArrayList<ItemFactura>();
         this.notas = notas;
         this.usuario = usuario;
+    }
+
+    public Factura(String notas) {
+        this.items =new ArrayList<ItemFactura>();
+        this.notas = notas;
     }
 
     @PrePersist

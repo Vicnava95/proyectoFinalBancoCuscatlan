@@ -17,22 +17,10 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/itemsFactura")
-public class ItemFacturaController {
-
-    private final ItemFacturaDAO itemFacturaDAO;
-
+public class ItemFacturaController extends GenericController<ItemFactura, ItemFacturaDAO>{
     @Autowired
-    public ItemFacturaController(ItemFacturaDAO itemFacturaDAO) {
-        this.itemFacturaDAO = itemFacturaDAO;
-    }
-
-    @GetMapping(value = "/listar")
-    public List<ItemFactura> listarItems(){
-        List<ItemFactura> items = (List<ItemFactura>) itemFacturaDAO.findAll();
-        if (items.isEmpty()){
-            throw new BadRequestException("No existen items de factura");
-        }
-        return items;
+    public ItemFacturaController(ItemFacturaDAO service) {
+        super(service);
     }
     //David
     /*@Autowired

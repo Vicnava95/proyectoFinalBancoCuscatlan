@@ -24,23 +24,10 @@ import com.springboot.proyectoFinal.repositorios.ProveedorRepository;
 
 @RestController
 @RequestMapping("/proveedor")
-public class ProveedorController {
-
-    private final ProveedorDAO proveedorDAO;
+public class ProveedorController extends GenericController<Proveedor, ProveedorDAO>{
 
     @Autowired
-    public ProveedorController(ProveedorDAO proveedorDAO) {
-        this.proveedorDAO = proveedorDAO;
+    public ProveedorController(ProveedorDAO service) {
+        super(service);
     }
-
-    @GetMapping(value = "/listar")
-    public List<Proveedor> listar()
-    {
-        List<Proveedor> proveedores = (List<Proveedor>) proveedorDAO.findAll();
-        if(proveedores.isEmpty()){
-            throw new BadRequestException("No existen proveedores");
-        }
-        return proveedores;
-    }
-
 }

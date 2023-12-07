@@ -1,6 +1,7 @@
 package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ public class ItemFactura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
     private Integer cantidad;
     @ManyToOne(
             optional = true,

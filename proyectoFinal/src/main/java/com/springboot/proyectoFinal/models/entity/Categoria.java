@@ -1,6 +1,7 @@
 package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty
     @Column(name = "nombre_categoria")
     private String nombre;
     private static final long serialVersionUID = 1l;

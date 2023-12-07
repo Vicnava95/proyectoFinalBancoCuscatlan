@@ -3,6 +3,8 @@ package com.springboot.proyectoFinal.models.entity;
 import com.springboot.proyectoFinal.models.entity.enumeradores.TipoUsuario;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
@@ -10,9 +12,10 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Usuario extends Persona{
 	@Column(name = "username")
-	private String username;
-	
+	@NotEmpty
+    private String username;
 	@Enumerated(EnumType.STRING)
+    @NotNull
     private TipoUsuario tipoUsuario;
 	
 	public Usuario() {};

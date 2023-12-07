@@ -24,23 +24,9 @@ import com.springboot.proyectoFinal.repositorios.ProductoRepository;
 
 @RestController
 @RequestMapping("/producto")
-public class ProductoController {
-
-	private final ProductoDAO productoDAO;
-
+public class ProductoController extends GenericController<Producto, ProductoDAO>{
 	@Autowired
-	public ProductoController(ProductoDAO productoDAO) {
-		this.productoDAO = productoDAO;
+	public ProductoController(ProductoDAO service) {
+		super(service);
 	}
-
-	@GetMapping(value ="/listar")
-	public List<Producto> listarProductos()
-	{
-		List<Producto> productos = (List<Producto>) productoDAO.findAll();
-		if (productos.isEmpty()){
-			throw new BadRequestException("No existen productos");
-		}
-		return productos;
-	}
-
 }

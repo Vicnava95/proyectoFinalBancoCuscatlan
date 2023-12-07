@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.ValueGenerationType;
 
 @Entity
@@ -16,9 +17,11 @@ public class Proveedor implements Serializable {
 	private Long id;
 	
 	@Column(name = "nombre_proveedor")
+    @NotEmpty
     private String nombre;
 	
 	@Column(name = "direccion_proveedor")
+    @NotEmpty
     private String direccion;
 
     private static final long serialVersionUID = 1l;

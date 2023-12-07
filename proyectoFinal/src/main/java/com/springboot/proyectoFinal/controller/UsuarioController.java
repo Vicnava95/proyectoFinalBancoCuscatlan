@@ -1,12 +1,17 @@
 package com.springboot.proyectoFinal.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.springboot.proyectoFinal.exception.BadRequestException;
 import com.springboot.proyectoFinal.models.entity.Categoria;
 import com.springboot.proyectoFinal.servicios.contratos.UsuarioDAO;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import com.springboot.proyectoFinal.models.entity.Persona;
@@ -44,8 +49,19 @@ public class UsuarioController{
 		return persona.get();
 	}
 	@PostMapping
-	public Usuario crearPersona(@RequestBody Usuario persona){
-		return (Usuario) usuarioDAO.save(persona);
+	public ResponseEntity<?> crearPersona(@Valid @RequestBody Usuario persona, BindingResult result){
+		//Validaciones
+		Map<String, Object> validaciones = new HashMap<>();
+		if (result.hasErrors()){
+			result.getFieldErrors()
+					.forEach(error ->validaciones.put(error.getField(), error.getDefaultMessage()));
+			return ResponseEntity.badRequest().body(validaciones);
+		}
+
+		Map<String, Object> mensaje = new HashMap<>();
+		mensaje.put("success",Boolean.TRUE);
+		mensaje.put("datos",(Usuario) usuarioDAO.save(persona));
+		return ResponseEntity.ok(mensaje);
 	}
 
 	@PutMapping("/{id}")
