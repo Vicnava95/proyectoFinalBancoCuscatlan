@@ -21,23 +21,32 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/categoriaDTO")
-public class CategoriaControllerDTO {
+public class CategoriaControllerDTO extends GenericDTOController<Categoria, CategoriaDAO>{
 
-
-    @Autowired
-    CategoriaDAO categoriaDAO;
 
     @Autowired
     CategoriaMapper mapper;
 
+    public CategoriaControllerDTO(CategoriaDAO service) {
+        super(service, "Categoria");
+
+    }
+
+
     @GetMapping("/listar")
-    public ResponseEntity<?> listarCategorias()
+    public ResponseEntity<?> obtenerCategorias()
     {
         Map<String, Object> mensaje = new HashMap<>();
-        List<Categoria> cat = (List<Categoria>) categoriaDAO.findAll();
+        List<Categoria> categoria = super.obtenerTodos();
 
-        List<categoriaDTO> categoria = cat.stream().map(CategoriaMapper::convertirDTO).collect(Collectors.toList());
+        if(categoria.isEmpty())
+        {
+            mensaje.put("success", Boolean.FALSE);
+            mensaje.put("mensaje", String.format("No se encontraron %ss cargadas", nombre_entidad));
+            return ResponseEntity.badRequest().body(mensaje);
+        }
 
+        List<categoriaDTO> categoriasdto = categoria.stream().map(CategoriaMapper::convertirDTO).collect(Collectors.toList());
         mensaje.put("data", categoria);
         return ResponseEntity.ok(mensaje);
     }

@@ -1,6 +1,20 @@
 package com.springboot.proyectoFinal.models.dto;
 
-public abstract class PersonaDTO {
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(
+		use = JsonTypeInfo.Id.NAME,
+		include = JsonTypeInfo.As.PROPERTY,
+		property = "tipo"
+		)
+
+@JsonSubTypes(
+		{
+			@JsonSubTypes.Type(value = UsuarioDTO.class, name ="user")
+		})
+
+public  abstract class PersonaDTO {
 
     private Long id;
     private String nombre;

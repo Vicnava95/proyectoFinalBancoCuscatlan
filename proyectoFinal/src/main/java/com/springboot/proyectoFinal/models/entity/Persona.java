@@ -15,6 +15,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name ="personas")
 @Inheritance(strategy = InheritanceType.JOINED)
+
 public abstract class Persona implements Serializable {
 
 	@Id
