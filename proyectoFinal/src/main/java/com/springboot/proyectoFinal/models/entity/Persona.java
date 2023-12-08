@@ -22,6 +22,7 @@ import jakarta.validation.constraints.NotEmpty;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Usuario.class, name = "usuario")
 
+
 })
 public abstract class Persona implements Serializable {
 
