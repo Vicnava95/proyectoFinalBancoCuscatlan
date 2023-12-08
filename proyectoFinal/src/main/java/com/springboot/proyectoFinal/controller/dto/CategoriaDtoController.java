@@ -88,5 +88,26 @@ public class CategoriaDtoController extends GenericDtoController<Categoria,Categ
         super.eliminarPorId(id);
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<?> actualizar(@PathVariable Long id,@Valid @RequestBody Categoria categoria, BindingResult result){
+        Map<String, Object> mensaje = new HashMap<>();
+        Optional<Categoria> optionalCategoria = super.buscarPorId(id);
+        Categoria categoria2 = optionalCategoria.orElse(null);
+        if (categoria == null){
+            /*throw new BadRequestException(String.format("El id de %s no se ha encontrado",nombreEntidad));*/
+            mensaje.put("success",Boolean.FALSE);
+            mensaje.put("mensaje",String.format("El id de %s no se ha encontrado",nombreEntidad));
+            return ResponseEntity.badRequest().body(mensaje);
+        }
+        categoria2.setNombre(categoria.getNombre());
+        service.save(categoria2);
+
+        CategoriaDTO categoriasDtos = CategoriaMapper.mapCategoria(categoria2);
+        mensaje.put("success",Boolean.TRUE);
+        mensaje.put("datos",categoriasDtos);
+
+        return ResponseEntity.ok(mensaje);
+    }
+
 
 }
