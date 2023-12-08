@@ -7,6 +7,7 @@ import com.springboot.proyectoFinal.exception.BadRequestException;
 import com.springboot.proyectoFinal.models.entity.Producto;
 import com.springboot.proyectoFinal.servicios.contratos.ProveedorDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +23,10 @@ import com.google.gson.Gson;
 import com.springboot.proyectoFinal.models.entity.Proveedor;
 import com.springboot.proyectoFinal.repositorios.ProveedorRepository;
 
+@Deprecated
 @RestController
 @RequestMapping("/proveedor")
+@ConditionalOnProperty(name = "controller.enable-dto", havingValue = "false")
 public class ProveedorController extends GenericController<Proveedor, ProveedorDAO>{
 
     @Autowired

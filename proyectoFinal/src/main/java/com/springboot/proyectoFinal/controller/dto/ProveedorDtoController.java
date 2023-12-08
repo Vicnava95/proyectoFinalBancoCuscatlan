@@ -1,13 +1,10 @@
 package com.springboot.proyectoFinal.controller.dto;
 
-import com.springboot.proyectoFinal.exception.BadRequestException;
-import com.springboot.proyectoFinal.models.dto.CategoriaDTO;
-import com.springboot.proyectoFinal.models.entity.Categoria;
-import com.springboot.proyectoFinal.models.mapper.CategoriaMapper;
-import com.springboot.proyectoFinal.servicios.contratos.CategoriaDAO;
+import com.springboot.proyectoFinal.models.dto.ProveedorDTO;
+import com.springboot.proyectoFinal.models.entity.Proveedor;
+import com.springboot.proyectoFinal.models.mapper.ProveedorMapper;
+import com.springboot.proyectoFinal.servicios.contratos.ProveedorDAO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -19,67 +16,65 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/categoria")
-public class CategoriaDtoController extends GenericDtoController<Categoria,CategoriaDAO>{
-
-    @Autowired
-    private CategoriaMapper mapper;
-
-    public CategoriaDtoController(CategoriaDAO service) {
-        super(service, "Categoria");
+@RequestMapping("/proveedor")
+public class ProveedorDtoController extends GenericDtoController<Proveedor, ProveedorDAO>{
+    private ProveedorMapper mapper;
+    public ProveedorDtoController(ProveedorDAO service) {
+        super(service, "Proveedor");
     }
 
     @GetMapping("/listar")
     public ResponseEntity<?> listar(){
         Map<String, Object> mensaje = new HashMap<>();
-        List<Categoria> categorias =  super.obtenerTodos();
+        List<Proveedor> proveedor =  super.obtenerTodos();
 
-        if (categorias.isEmpty()){
+        if (proveedor.isEmpty()){
             mensaje.put("success",Boolean.FALSE);
-            mensaje.put("datos",categorias);
+            mensaje.put("datos",proveedor);
             return ResponseEntity.badRequest().body(mensaje);
         }
 
-        List<CategoriaDTO> categoriasDtos = categorias
+        List<ProveedorDTO> proveedorDtos = proveedor
                 .stream()
-                .map(CategoriaMapper::mapCategoria)
+                .map(ProveedorMapper::mapProveedor)
                 .collect(Collectors.toList());
 
         mensaje.put("success",Boolean.TRUE);
-        mensaje.put("datos",categoriasDtos);
+        mensaje.put("datos",proveedorDtos);
 
         return ResponseEntity.ok(mensaje);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerPorId(@PathVariable Long id){
         Map<String, Object> mensaje = new HashMap<>();
 
-        Optional<Categoria> optionalCategoria = super.buscarPorId(id);
-        Categoria categoria = optionalCategoria.orElse(null);
-        if (categoria == null){
+        Optional<Proveedor> optionalProveedor = super.buscarPorId(id);
+        Proveedor proveedor = optionalProveedor.orElse(null);
+        if (proveedor == null){
             /*throw new BadRequestException(String.format("El id de %s no se ha encontrado",nombreEntidad));*/
             mensaje.put("success",Boolean.FALSE);
             mensaje.put("mensaje",String.format("El id de %s no se ha encontrado",nombreEntidad));
             return ResponseEntity.badRequest().body(mensaje);
         }
 
-        CategoriaDTO categoriasDtos = CategoriaMapper.mapCategoria(categoria);
+        ProveedorDTO proveedorDtos = ProveedorMapper.mapProveedor(proveedor);
         mensaje.put("success",Boolean.TRUE);
-        mensaje.put("datos",categoriasDtos);
+        mensaje.put("datos",proveedorDtos);
 
         return ResponseEntity.ok(mensaje);
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@Valid @RequestBody Categoria categoria, BindingResult result){
+    public ResponseEntity<?> crear(@Valid @RequestBody Proveedor proveedor, BindingResult result){
         //Validaciones
         super.obtenerValidaciones(result);
-        super.crearEntidad(categoria);
+        super.crearEntidad(proveedor);
         Map<String, Object> mensaje = new HashMap<>();
 
-        CategoriaDTO categoriasDtos = CategoriaMapper.mapCategoria(categoria);
+        ProveedorDTO proveedorDTOs = ProveedorMapper.mapProveedor(proveedor);
         mensaje.put("success",Boolean.TRUE);
-        mensaje.put("datos",categoriasDtos);
+        mensaje.put("datos",proveedorDTOs);
         return ResponseEntity.ok(mensaje);
     }
 
@@ -89,25 +84,24 @@ public class CategoriaDtoController extends GenericDtoController<Categoria,Categ
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable Long id,@Valid @RequestBody Categoria categoria, BindingResult result){
+    public ResponseEntity<?> actualizar(@PathVariable Long id,@Valid @RequestBody Proveedor proveedor, BindingResult result){
         Map<String, Object> mensaje = new HashMap<>();
-        Optional<Categoria> optionalCategoria = super.buscarPorId(id);
-        Categoria categoria2 = optionalCategoria.get();
-        if (categoria2 == null){
+        Optional<Proveedor> optionalProveedor = super.buscarPorId(id);
+        Proveedor proveedor1 = optionalProveedor.get();
+        if (proveedor1 == null){
             /*throw new BadRequestException(String.format("El id de %s no se ha encontrado",nombreEntidad));*/
             mensaje.put("success",Boolean.FALSE);
             mensaje.put("mensaje",String.format("El id de %s no se ha encontrado",nombreEntidad));
             return ResponseEntity.badRequest().body(mensaje);
         }
-        categoria2.setNombre(categoria.getNombre());
-        service.save(categoria2);
+        proveedor1.setNombre(proveedor.getNombre());
+        proveedor1.setDireccion(proveedor.getDireccion());
+        service.save(proveedor1);
 
-        CategoriaDTO categoriasDtos = CategoriaMapper.mapCategoria(categoria2);
+        ProveedorDTO proveedorDTOs = ProveedorMapper.mapProveedor(proveedor1);
         mensaje.put("success",Boolean.TRUE);
-        mensaje.put("datos",categoriasDtos);
+        mensaje.put("datos",proveedorDTOs);
 
         return ResponseEntity.ok(mensaje);
     }
-
-
 }
