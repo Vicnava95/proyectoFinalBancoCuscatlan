@@ -2,6 +2,7 @@ package com.springboot.proyectoFinal.models.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.action.internal.OrphanRemovalAction;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ public class ItemFactura implements Serializable {
     @NotNull
     private Integer cantidad;
     @ManyToOne(
+
             optional = true,
             fetch = FetchType.EAGER
     )

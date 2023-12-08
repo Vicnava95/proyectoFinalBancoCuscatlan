@@ -9,6 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+
 @Entity
 @Table(name = "productos")
 public class Producto implements Serializable {
@@ -37,6 +39,14 @@ public class Producto implements Serializable {
             foreignKey = @ForeignKey(name = "FK_CATEGORIA_ID")
     )
     private Categoria categoria;
+
+    @OneToMany(
+            orphanRemoval = false,
+            mappedBy = "producto",
+            cascade = CascadeType.ALL
+
+    )
+    private List<ItemFactura> items;
 
     private static final long serialVersionUID = 1l;
 
