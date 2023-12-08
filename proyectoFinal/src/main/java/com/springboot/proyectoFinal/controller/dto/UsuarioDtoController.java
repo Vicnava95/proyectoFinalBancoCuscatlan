@@ -24,7 +24,7 @@ public class UsuarioDtoController {
 	@Autowired
 	UsuarioDAO usuarioDAO;
 	
-	
+
 	@GetMapping("/listar")
 	public List<UsuarioDTO> listarUsuarios()
 	{
