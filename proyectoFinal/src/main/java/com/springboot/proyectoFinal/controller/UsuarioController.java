@@ -10,6 +10,7 @@ import com.springboot.proyectoFinal.models.entity.Categoria;
 import com.springboot.proyectoFinal.servicios.contratos.UsuarioDAO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,10 @@ import com.springboot.proyectoFinal.models.entity.enumeradores.TipoUsuario;
 import com.springboot.proyectoFinal.repositorios.PersonaRepository;
 import com.springboot.proyectoFinal.repositorios.UsuarioRepository;
 
-
+@Deprecated
 @RestController
 @RequestMapping("/usuario")
+@ConditionalOnProperty(name = "controller.enable-dto", havingValue = "false")
 public class UsuarioController{
 
 	private final UsuarioDAO usuarioDAO;
